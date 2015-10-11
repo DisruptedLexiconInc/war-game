@@ -7,43 +7,50 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "serverId", "name" }) )
 @Entity
 public class Player {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Player.class);
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
 
     @Column(nullable = false)
-    private String username;
+    private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private Date dateJoined;
 
     @Column(nullable = false)
+    private int serverId;
+
+    @Column(nullable = false)
     private int level;
-
-    private int hitPoints;
-
-    private int attack;
 
     public Player() {
         this.dateJoined = new Date();
     }
 
     public Player(String username) {
-        this.username = username;
         this.dateJoined = new Date();
-        this.hitPoints = 1000;
-        this.attack = 100;
     }
 
-    public Player(String username, int hitPoints, int attack) {
-        this.username = username;
-        this.dateJoined = new Date();
-        this.hitPoints = hitPoints;
-        this.attack = attack;
+    public Player(String name, int serverId, int level) {
+        this();
+        this.name = name;
+        this.serverId = serverId;
+        this.level = level;
     }
 
     public long getId() {
@@ -54,12 +61,12 @@ public class Player {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDateJoined() {
@@ -70,11 +77,29 @@ public class Player {
         this.dateJoined = dateJoined;
     }
 
+    public int getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(int serverId) {
+        this.serverId = serverId;
+    }
+
     public int getLevel() {
         return level;
     }
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Error creating json to string. Returns super.toString()", e);
+            return super.toString();
+        }
     }
 }
