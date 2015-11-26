@@ -28,3 +28,4 @@ hs_err_pid*
 target
 /war-game-parent/war-game-server/wargameserver.log
 /war-game-parent/TestFile
+*.log
