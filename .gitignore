@@ -29,3 +29,4 @@ target
 /war-game-parent/war-game-server/wargameserver.log
 /war-game-parent/TestFile
 *.log
+/war-game-parent/war-game-javafx/*.log
