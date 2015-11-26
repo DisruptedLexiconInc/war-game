@@ -1,28 +1,14 @@
-package com.hive.wargame.server.dao;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+package com.hive.jfx.wargame.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Entity
 public class UserInfo {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Id
     private long id;
 
-    @Column(nullable = false, unique = true)
     private String emailAddress;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
     private Address address;
 
     public UserInfo() {

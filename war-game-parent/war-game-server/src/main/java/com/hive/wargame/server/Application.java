@@ -9,8 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.hive.wargame.server.dao.User;
-
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan("com.hive.wargame.server")
@@ -22,9 +20,18 @@ public class Application {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 
-        User user = new User();
-        user.setPassword("password");
-        user.setUsername("gsugambit");
-        System.out.println(user.toString());
+        // User user = new User();
+        // user.setPassword("password");
+        // user.setUsername("gsugambit");
+        // user.setUserRole(Roles.ADMIN);
+        //
+        // UserInfo info = new UserInfo();
+        // info.setEmailAddress("gsugambit@gmail.com");
+        // Address address = new Address("4906 Cherokee Heights Rd", "Panama City", "FL", 32404, "United States");
+        // info.setAddress(address);
+        //
+        // user.setInfo(info);
+        //
+        // System.out.println(user.toString());
     }
 }

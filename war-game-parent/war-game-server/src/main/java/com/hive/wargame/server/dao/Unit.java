@@ -1,6 +1,8 @@
 package com.hive.wargame.server.dao;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import com.hive.wargame.server.constants.Rarity;
 
@@ -12,7 +14,7 @@ public class Unit {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Rarity rarity;
 
     private int level;

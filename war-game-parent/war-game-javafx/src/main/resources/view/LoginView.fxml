@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hive.jfx.wargame.controller.LoginController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="800.0" styleClass="background" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titleLabel" layoutX="21.0" layoutY="54.0" prefHeight="62.0" prefWidth="600.0" styleClass="label-header" text=""/>
+            <Label layoutX="102.0" layoutY="124.0" text="Username:" />
+            <Label layoutX="104.0" layoutY="169.0" text="Password:" />
+            <TextField fx:id="usernameField" layoutX="184.0" layoutY="116.0" promptText="Enter your username..." />
+            <PasswordField fx:id="passwordField" layoutX="184.0" layoutY="161.0" promptText="Enter your password..." />
+            <DialogPane layoutX="137.0" layoutY="215.0" prefHeight="61.0" prefWidth="222.0" styleClass="background" />
+            <Button defaultButton="true" layoutX="148.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="33.0" prefWidth="92.0"
+                    text="Login"/>
+            <Button cancelButton="true" layoutX="267.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleCancel"  prefHeight="33.0" prefWidth="92.0" text="Cancel" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

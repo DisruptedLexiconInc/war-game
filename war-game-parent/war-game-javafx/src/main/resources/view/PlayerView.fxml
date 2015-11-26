@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hive.jfx.wargame.controller.PlayerController">
+   <children>
+      <Pane layoutX="-1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="lblWelcome" layoutX="223.0" layoutY="20.0" prefHeight="17.0" prefWidth="123.0" text="Welcome " />
+            <Label layoutX="37.0" layoutY="74.0" text="Archer Units" />
+            <Label layoutX="37.0" layoutY="108.0" text="Hero" />
+            <TextField fx:id="txtArcher" editable="=false" layoutX="111.0" layoutY="70.0" />
+            <TextField fx:id="txtHero" editable="=false" layoutX="111.0" layoutY="104.0" />
+            <Button fx:id="btnBuildWarrior" layoutX="162.0" layoutY="345.0" mnemonicParsing="false" text="Build Warrior(s)" />
+            <Label layoutX="36.0" layoutY="45.0" text="Warrior Units" />
+            <TextField fx:id="txtWarrior" layoutX="111.0" layoutY="41.0" />
+            <Button fx:id="btnBuildArcher" layoutX="302.0" layoutY="345.0" mnemonicParsing="false" text="Build Archer(s)" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -9,13 +9,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
-public class HeroUnit extends Unit {
+public class Army {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String name;
+    private int numOfArchers;
+
+    private int numOfWarriors;
 
     public long getId() {
         return id;
@@ -25,14 +27,20 @@ public class HeroUnit extends Unit {
         this.id = id;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public int getNumOfArchers() {
+        return numOfArchers;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setNumOfArchers(int numOfArchers) {
+        this.numOfArchers = numOfArchers;
+    }
+
+    public int getNumOfWarriors() {
+        return numOfWarriors;
+    }
+
+    public void setNumOfWarriors(int numOfWarriors) {
+        this.numOfWarriors = numOfWarriors;
     }
 
     @Override

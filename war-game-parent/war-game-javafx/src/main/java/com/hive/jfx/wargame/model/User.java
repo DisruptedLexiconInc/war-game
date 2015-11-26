@@ -1,48 +1,24 @@
-package com.hive.wargame.server.dao;
+package com.hive.jfx.wargame.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hive.wargame.server.constants.Roles;
 
-@Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Id
     private long id;
 
-    // @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Player.class, mappedBy = "user")
-    // private List<Player> playerList;
-
-    @Column(nullable = false, updatable = false)
     private Date dateJoined;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
     private UserInfo info;
 
-    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Roles userRole;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
     private Army army;
 
     public User() {
@@ -103,14 +79,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Roles getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(Roles userRole) {
-        this.userRole = userRole;
     }
 
     public Army getArmy() {

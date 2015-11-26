@@ -1,0 +1,27 @@
+[
+	{
+	"_class": "com.hive.wargame.server.dao.User",
+  "id" : 0,
+  "dateJoined" : 1448504721954,
+  "info" : {
+    "id" : 0,
+    "emailAddress" : "gsugambit@gmail.com",
+    "address" : {
+      "id" : 0,
+      "street" : "4906 Cherokee Heights Rd",
+      "city" : "Panama City",
+      "state" : "FL",
+      "zipCode" : 32404,
+      "country" : "United States"
+    }
+  },
+  "username" : "7",
+  "password" : "7",
+  "userRole" : "ADMIN",  
+  "army" : {
+  	"numOfArchers" : 1000,
+  	"numOfWarriors" : 1000
+  }
+}
+	
+]

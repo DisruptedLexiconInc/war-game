@@ -21,7 +21,7 @@
                 <MarkerFilter marker="EXCEPTION" onMatch="ACCEPT" onMismatch="DENY"/>
             </filters>
         </Console>
-        <File name="File" fileName="wargameserver.log">
+        <File name="File" fileName="wargamejfx.log">
             <PatternLayout>
                 <pattern>%d %p %C{1.} [%t] %m%n</pattern>
             </PatternLayout>
@@ -29,17 +29,18 @@
 
     </Appenders>
     <Loggers>
-<!--
-        <Logger name="org.jboss.resteasy" level="INFO" additivity="true">
+ <!--       <Logger name="org.jboss.resteasy" level="INFO" additivity="true">
             <AppenderRef ref="Console"/>
         </Logger>
         <Logger name="org.apache.http.wire" level="DEBUG" additivity="true">
             <AppenderRef ref="Console"/>
         </Logger>
+        <Logger name="org.springframework.web.servlet.mvc" level="DEBUG" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
 -->
-
         <Logger name="com.hive" level="trace" additivity="true">
-            <AppenderRef ref="File"/>
+            <AppenderRef ref="File" />
         </Logger>
         <!--<Logger name="org.hibernate" level="info" additivity="true">
             <AppenderRef ref="File" />

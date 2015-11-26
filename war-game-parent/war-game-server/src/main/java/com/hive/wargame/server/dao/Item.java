@@ -2,6 +2,8 @@ package com.hive.wargame.server.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +20,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
     @Column(nullable = false, unique = true)
@@ -27,7 +29,7 @@ public class Item {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Rarity rarity;
 
     public Item() {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hive.wargame.server.dao.Player;
 
 @RestController
-@RequestMapping("/battle")
+@RequestMapping("/wargameServer/battle")
 public class BattleService {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

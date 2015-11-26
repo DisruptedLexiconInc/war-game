@@ -26,3 +26,5 @@ hs_err_pid*
 .project
 .settings
 target
+/war-game-parent/war-game-server/wargameserver.log
+/war-game-parent/TestFile

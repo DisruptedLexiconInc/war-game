@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 import com.hive.wargame.server.dao.Player;
 import com.hive.wargame.server.dao.PlayerRepository;
 
-@RequestMapping("/player")
+@RequestMapping("/wargameServer/player")
 @RestController
 @Service
 @Transactional
