@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>war-game-server</module>
+		<module>war-game-javafx</module>
 		<module>war-game-client</module>
 	</modules>
 
