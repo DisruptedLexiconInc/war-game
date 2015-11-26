@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.hive.jfx.wargame.controller.ArmyBuildController;
 import com.hive.jfx.wargame.controller.LoginController;
 import com.hive.jfx.wargame.controller.PlayerController;
 import com.hive.jfx.wargame.spring.SpringFxmlLoader;
@@ -114,7 +115,26 @@ public class JFXApplication extends Application {
             PlayerController controller = fxmlLoader.getController();
             controller.setForceProClient(this);
         } catch (Exception e) {
-            LOGGER.error("Could not load login", e);
+            LOGGER.error("Could not load PlayerView", e);
+        }
+    }
+
+    public void showArmyBuild() {
+        try {
+            primaryStage.toFront();
+
+            AnchorPane armyBuild = fxmlLoader.load("view/ArmyBuildView.fxml");
+
+            Scene scene = new Scene(armyBuild);
+            primaryStage.setScene(scene);
+
+            primaryStage.show();
+
+            // Give the controller access to the main app.
+            ArmyBuildController controller = fxmlLoader.getController();
+            controller.setForceProClient(this);
+        } catch (Exception e) {
+            LOGGER.error("Could not load ArmyBuildView", e);
         }
     }
 }
