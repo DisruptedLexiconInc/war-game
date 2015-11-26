@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.hive.jfx.wargame.JFXApplication;
+import com.hive.jfx.wargame.constants.Constants;
 import com.hive.jfx.wargame.exception.RemoteServiceException;
 import com.hive.jfx.wargame.model.Army;
 import com.hive.jfx.wargame.restclient.ArmyService;
@@ -33,6 +34,8 @@ public class PlayerController {
     private TextField txtWarrior;
     @FXML
     private TextField txtHero;
+    @FXML
+    private TextField txtEnergy;
     @FXML
     private Button btnBuildArmy;
 
@@ -57,35 +60,39 @@ public class PlayerController {
 
     public void refreshUI() {
 
-        LOGGER.debug("Refreshing the UI");
-        Army army = AuthenticationService.CURRENT_USER.getArmy();
+        if (AuthenticationService.CURRENT_USER != null) {
+            LOGGER.debug("Refreshing the UI");
+            Army army = AuthenticationService.CURRENT_USER.getArmy();
 
-        txtWarrior.setText(String.valueOf(army.getNumOfWarriors()));
-        txtArcher.setText(String.valueOf(army.getNumOfArchers()));
-        txtHero.setText(String.valueOf(heroLevel));
+            txtWarrior.setText(String.valueOf(army.getNumOfWarriors()));
+            txtArcher.setText(String.valueOf(army.getNumOfArchers()));
+            txtHero.setText(String.valueOf(heroLevel));
+            txtEnergy.setText(String.valueOf(army.getEnergy()));
+        }
     }
 
     @Scheduled(fixedRate = 1000)
     protected void saveArmy() {
 
-        if (isChildFocused(root)) {
+        // we only run if user is logged in and army has changed
+        if (AuthenticationService.CURRENT_USER != null) {
 
-            // we only run if user is logged in and army has changed
-            if (AuthenticationService.CURRENT_USER != null) {
+            Army army = AuthenticationService.CURRENT_USER.getArmy();
 
-                Army army = AuthenticationService.CURRENT_USER.getArmy();
+            if (army.isDirty()) {
 
-                if (army.isDirty()) {
+                LOGGER.trace("Running autosave for army on {}. \n{}", AuthenticationService.CURRENT_USER.getUsername(), army.toString());
 
-                    LOGGER.trace("Running autosave for army on {}. \n{}", AuthenticationService.CURRENT_USER.getUsername(), army.toString());
+                try {
+                    // automatically sets dirty to false because it is not in server side code
+                    AuthenticationService.CURRENT_USER.setArmy(armyService.save(army));
+                } catch (RemoteServiceException e) {
+                    LOGGER.warn("Error trying to autosave army:" + e.getMessage(), e);
+                }
+            } else {
 
-                    try {
-                        // automatically sets dirty to false because it is not in server side code
-                        AuthenticationService.CURRENT_USER.setArmy(armyService.save(army));
-                    } catch (RemoteServiceException e) {
-                        LOGGER.warn("Error trying to autosave army:" + e.getMessage(), e);
-                    }
-                } else {
+                if (isChildFocused(root)) {
+
                     // we do this in case the user has another client and changes the armies. forces sync no matter how many clients
                     try {
 
@@ -93,12 +100,27 @@ public class PlayerController {
                                         AuthenticationService.CURRENT_USER.getArmy().toString());
 
                         AuthenticationService.CURRENT_USER.setArmy(armyService.get(army.getId()));
-
-                        refreshUI();
                     } catch (RemoteServiceException e) {
                         LOGGER.warn("Error trying to autosave army:" + e.getMessage(), e);
                     }
                 }
+            }
+
+            refreshUI();
+        }
+    }
+
+    @Scheduled(fixedDelayString = "${energy.refreshRate}")
+    protected void replenishEnergy() {
+
+        // we only run if user is logged in and army has changed
+        if (AuthenticationService.CURRENT_USER != null) {
+
+            Army army = AuthenticationService.CURRENT_USER.getArmy();
+
+            if (army.getEnergy() != 100) {
+                army.setEnergy(army.getEnergy() + Constants.ENERGY_REPLENISH_AMOUNT);
+                army.setDirty(true);
             }
         }
     }

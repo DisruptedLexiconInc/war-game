@@ -12,6 +12,8 @@ public class Army {
 
     private int numOfWarriors;
 
+    private int energy;
+
     @JsonIgnore
     private boolean dirty;
 
@@ -45,6 +47,20 @@ public class Army {
 
     public void setDirty(boolean dirty) {
         this.dirty = dirty;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        if (energy > 100) {
+            energy = 100;
+        } else if (energy < 0) {
+            energy = 0;
+        } else {
+            this.energy = energy;
+        }
     }
 
     @Override

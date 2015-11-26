@@ -15,6 +15,8 @@ public class Army {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private int energy;
+
     private int numOfArchers;
 
     private int numOfWarriors;
@@ -41,6 +43,14 @@ public class Army {
 
     public void setNumOfWarriors(int numOfWarriors) {
         this.numOfWarriors = numOfWarriors;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
     }
 
     @Override

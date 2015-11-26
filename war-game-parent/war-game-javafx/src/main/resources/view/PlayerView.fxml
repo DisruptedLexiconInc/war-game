@@ -16,6 +16,8 @@
             <Label layoutX="36.0" layoutY="45.0" text="Warrior Units" />
             <TextField fx:id="txtWarrior" layoutX="111.0" layoutY="41.0" />
             <Button fx:id="btnBuildArmy" layoutX="278.0" layoutY="345.0" mnemonicParsing="false" text="Build Army" />
+            <Label layoutX="36.0" layoutY="140.0" text="Energy" />
+            <TextField fx:id="txtEnergy" editable="false" layoutX="111.0" layoutY="136.0" />
          </children>
       </Pane>
    </children>

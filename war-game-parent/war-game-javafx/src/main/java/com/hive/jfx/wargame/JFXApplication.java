@@ -50,7 +50,7 @@ public class JFXApplication extends Application {
         if ((minorVersion < 1.8) || (update < 45)) {
             LOGGER.warn("Client is not running Java 1.8.0 Update 45 or above. Closing.");
             JOptionPane.showMessageDialog(null, String.format(
-                            "The minimum JAVA requirement for Forcepro is JAVA 1.8.0 Update 45. You only have %s. Please update your JAVA", javaVersion),
+                            "The minimum JAVA requirement for WarGame is JAVA 1.8.0 Update 45. You only have %s. Please update your JAVA", javaVersion),
                             "Required JAVA Version", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         } else {
@@ -133,6 +133,7 @@ public class JFXApplication extends Application {
             // Give the controller access to the main app.
             ArmyBuildController controller = fxmlLoader.getController();
             controller.setForceProClient(this);
+            controller.setDialogStage(primaryStage);
         } catch (Exception e) {
             LOGGER.error("Could not load ArmyBuildView", e);
         }
