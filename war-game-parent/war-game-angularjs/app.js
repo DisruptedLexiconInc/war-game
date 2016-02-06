@@ -51,7 +51,7 @@ myApp.controller('welcomeController', ['$scope', '$log', 'loginService', functio
 }]);
 
 // CONTROLLERS
-myApp.controller('loginController', ['$scope', '$log', '$location', 'loginService', '$http', '$resource', function ($scope, $log, $location, loginService, $http, $resource) {                                     
+myApp.controller('loginController', ['$scope', '$log', '$location', 'loginService', '$resource', '$http', function ($scope, $log, $location, loginService, $resource, $http) {                                     
     
     $log.info('User loaded login screen');
     
@@ -59,16 +59,30 @@ myApp.controller('loginController', ['$scope', '$log', '$location', 'loginServic
         var username = document.getElementById('login-username').value;
         var password = document.getElementById('login-password').value;
         
-        console.log('login function called by ' + username + ' with password: ' + password);
-        loginService.loggedInUser = username;
+        $log.debug('login function called by ' + username + ' with password: ' + password);
+       
+        function usercontext(id, username, password) {
+            this.id = id;
+            this.username = username;
+            this.password = password;
+        }
         
-        var data = '\'username\':' + username + ', \'password\':' + password;
+        var data = new usercontext(null,username, password);
         
-        $resource('http://127.0.0.1:51849/player', {}, {'query':{ method: 'POST'}}).query(data);        
+        $scope.restreturn = JSON.parse($resource('http://127.0.0.1:51849/login', {}, {'query':{ method: 'GET'}}).query(data));
+        $log.debug($scope);
+         $log.debug($scope.restreturn);
+         $log.debug($scope.restreturn.id);
         
-        alert('You have successfully been logged in: ' + loginService.userName);        
+        var x =JSON.parse(JSON.stringify($scope.restreturn));
+        console.log(x.id);
         
-        $location.url('/welcome');
+        if($scope.restreturn.id !==0) {
+            loginService.loggedInUser = $scope.restreturn.username;
+            $location.url('/welcome');
+        }else {
+            alert('Login failed');
+        } 
     }
 }]);
 
@@ -76,8 +90,22 @@ myApp.controller('missionsController', ['$scope', '$log', '$routeParams', functi
    $log.info('User loaded missions screen');
 }]);
 
-myApp.controller('battleController', ['$scope', '$log', '$routeParams', function($scope, $log, $routeParams) {                                            
+myApp.controller('battleController', ['$scope', '$log', 'resource', function($scope, $log, $resource) {                                            
    $log.info('User loaded battle screen');
+    
+//    function usercontext(id, username, password) {
+//            this.id = id;
+//            this.username = username;
+//            this.password = password;
+//        }
+//    
+//    var getReturn = $resource('http://127.0.0.1:51849/users/', {}, {'query':{ method: 'GET'}}).query(data);
+//    $log.debug(getReturn);
+//        if(getReturn.id !=0) {
+//            $scope.usercontexts = getReturn.username;
+//        }else {
+//           $log.warn('GET failed for battle controller');
+//        }       
 }]);
 
 myApp.controller('alliesController', ['$scope', '$log', '$routeParams', function($scope, $log, $routeParams) {                                            
@@ -87,5 +115,10 @@ myApp.controller('alliesController', ['$scope', '$log', '$routeParams', function
 
 //SERVICES
 myApp.service('loginService', function() {
-   this.loggedInUser = ''; 
+    
+    var self = this;
+    this.loggedInUser = ''; 
+    this.loggedInUserNameLength = function() {
+        return self.loggedInUser.length;  
+    };
 });

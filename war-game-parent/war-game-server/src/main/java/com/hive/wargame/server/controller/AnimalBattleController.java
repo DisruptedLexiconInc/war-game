@@ -1,6 +1,7 @@
 package com.hive.wargame.server.controller;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +27,17 @@ public class AnimalBattleController {
         LOGGER.debug("Example: {}", new Credential("exUsername", "exPassword").toString());
     }
 
-    @RequestMapping(value = { "/player", "/player/" }, method = { RequestMethod.POST, RequestMethod.GET })
-    public @ResponseBody String getPlayer(@RequestBody(required = false) Credential cred) {
+    @RequestMapping(value = { "/player", "/player/" }, method = { RequestMethod.POST, RequestMethod.GET }
+    // headers = { "Access-Control-Allow-Origin=*", "Access-Control-Allow-Headers=Origin, X-Requested-With, Content-Type, Accept",
+    // "Access-Control-Allow-Methods=GET, POST, PUT, DELETE" }
+    )
+    public @ResponseBody String getPlayer(@RequestBody Credential cred, HttpServletResponse response) {
         if (cred == null) {
             LOGGER.warn("cred was null");
             return "Ben";
         } else {
             LOGGER.debug("Received cred: {}", cred);
+            LOGGER.debug("response: {}", response);
             return cred.toString();
         }
     }

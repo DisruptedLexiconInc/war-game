@@ -1,0 +1,13 @@
+---
+server:
+  port: 51849
+spring:
+  datasource:
+    url: jdbc:h2:mem:warGameAngularjsServer;DB_CLOSE_ON_EXIT=FALSE
+    username: none
+    password: none
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
