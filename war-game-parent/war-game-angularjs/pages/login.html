@@ -1,0 +1,14 @@
+<div ng-controller="loginController"> 
+<section class="loginform cf">
+<form name="login" accept-charset="utf-8">
+    <!--action="login.js" -->
+    <ul>
+        <li><label for="username">Username</label>
+        <input type="username" id="login-username" placeholder="username" required></li>
+        <li><label for="password">Password</label>
+        <input type="password" id="login-password" placeholder="password" required></li>        
+    </ul>
+    <input type="submit" value="Login" ng-click="loginUser()">
+</form>
+</section>
+</div>
