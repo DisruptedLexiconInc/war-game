@@ -67,6 +67,21 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.jme3</groupId>
+			<artifactId>jme3-core</artifactId>
+			<version>3.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jme3</groupId>
+			<artifactId>jme3-desktop</artifactId>
+			<version>3.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jme3</groupId>
+			<artifactId>jme3-lwjgl</artifactId>
+			<version>3.0.10</version>
+		</dependency>
 	</dependencies>
 
 	<build>
