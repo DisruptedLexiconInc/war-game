@@ -1,6 +1,6 @@
 ---
 server:
-  port: 12345
+  port: 51849
 spring:
   datasource:
     url: ${spring.datasource.url}
