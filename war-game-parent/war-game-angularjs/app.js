@@ -61,29 +61,28 @@ myApp.controller('loginController', ['$scope', '$log', '$location', 'loginServic
         
         $log.debug('login function called by ' + username + ' with password: ' + password);
        
-        function usercontext(id, username, password) {
+        function Usercontext(id, username, password) {
             this.id = id;
             this.username = username;
             this.password = password;
         }
         
-        var data = new usercontext(null,username, password);
+        var data = {username : username, password : password};
         
-        $scope.restreturn = JSON.parse($resource('http://127.0.0.1:51849/login', {}, {'query':{ method: 'GET'}}).query(data));
-        $log.debug($scope);
-         $log.debug($scope.restreturn);
-         $log.debug($scope.restreturn.id);
+        $scope.restreturn = $http.post('http://127.0.0.1:51849/login', JSON.stringify(data)).success(function (data, status) {
+            $log.log('the data is' + data);
+            loginService.loggedInUser = data.username;
+        }).error(function (status) {
+            $log.warn('error happened: ' + status);
+        });
         
-        var x =JSON.parse(JSON.stringify($scope.restreturn));
-        console.log(x.id);
-        
-        if($scope.restreturn.id !==0) {
+        if(data !==0) {
             loginService.loggedInUser = $scope.restreturn.username;
             $location.url('/welcome');
         }else {
             alert('Login failed');
         } 
-    }
+    };
 }]);
 
 myApp.controller('missionsController', ['$scope', '$log', '$routeParams', function($scope, $log, $routeParams) {                                            

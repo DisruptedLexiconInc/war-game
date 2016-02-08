@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.warn("User object is null.");
             throw new LoginException("Null username or password.");
         } else {
+            LOGGER.trace("{}", user.toString());
             String username = user.getUsername();
             String password = MD5(user.getPassword());
 
