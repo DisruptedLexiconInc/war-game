@@ -1,7 +1,5 @@
 package com.hive.wargame.angularjs.server.dao;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -12,5 +10,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsernameIgnoreCaseAndPassword(String username, String password);
 
-    List<User> findTop100NotUsernameOrderByUsername(String username);
 }
