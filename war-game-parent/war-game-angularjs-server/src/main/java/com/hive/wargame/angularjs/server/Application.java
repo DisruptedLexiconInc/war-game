@@ -17,5 +17,9 @@ public class Application {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+
+        // for (String bean : context.getBeanDefinitionNames()) {
+        // System.out.println(bean);
+        // }
     }
 }
