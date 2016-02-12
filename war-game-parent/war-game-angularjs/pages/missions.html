@@ -1,0 +1,8 @@
+<div ng-controller="missionsController">
+    <h3>Missions</h3>
+    <ul style="list-style-type:none">
+        <li ng-repeat="mission in missions">
+            Name:{{ mission.name }} Energy:{{ mission.energy }}
+        </li>
+    </ul>
+</div>
