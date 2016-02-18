@@ -36,9 +36,16 @@ public class InitializerService {
         if (users.isEmpty()) {
             LOGGER.trace("There are no users in database. Adding mock users.");
 
-            userService.add(new User("gsugambit", "gsugambit"));
-            userService.add(new User("bludbaf", "bludbaf"));
-            userService.add(new User("benlm", "benlm"));
+            userService.add(new User("gsugambit", "gsugambit", 0, 0, 1000, 100));
+            userService.add(new User("bludbaf", "bludbaf", 0, 0, 1000, 100));
+            userService.add(new User("benlm", "benlm", 0, 0, 1000, 100));
+
+            String level = "level";
+            String currUser;
+            for (int i = 0; i < 51; i++) {
+                currUser = level + i;
+                userService.add(new User(currUser, currUser, i, i * 50, i, 100));
+            }
         } else {
             LOGGER.trace("Database contains users. Will not add mock users.");
         }
@@ -48,8 +55,8 @@ public class InitializerService {
         if (missions.isEmpty()) {
             LOGGER.trace("There are no missions in database. Adding mock missions.");
 
-            missionService.add(new Mission("Kickbox", 100));
-            missionService.add(new Mission("Rob Bank", 200));
+            missionService.add(new Mission("Kickbox", 100, 10, 200, 0));
+            missionService.add(new Mission("Rob Bank", 200, 15, 400, 1));
         } else {
             LOGGER.trace("Database contains users. Will not add mock users.");
         }

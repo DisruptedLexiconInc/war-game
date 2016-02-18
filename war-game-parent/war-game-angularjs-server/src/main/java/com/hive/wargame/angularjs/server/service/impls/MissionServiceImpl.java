@@ -22,8 +22,8 @@ public class MissionServiceImpl implements MissionService {
 
     @Override
     public Mission add(Mission mission) {
-        if ((mission == null) || (mission.getName() == null)) {
-            LOGGER.debug("Receiving a null mission: {} or mission-name: {}", mission == null, (mission == null) ? "null" : mission.getName());
+        if (!checkMission(mission)) {
+            LOGGER.debug("Mission does not pass check. Will not add: {}", mission.toString());
             return null;
         }
 
@@ -33,5 +33,10 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public List<Mission> getAll() {
         return Lists.newArrayList(missionRepository.findAll());
+    }
+
+    private boolean checkMission(Mission mission) {
+        return ((mission != null) && (mission.getName() != null) && (mission.getEnergy() != 0) && (mission.getHighCashRange() != 0) && (mission
+                        .getLowCashRange() != 0));
     }
 }

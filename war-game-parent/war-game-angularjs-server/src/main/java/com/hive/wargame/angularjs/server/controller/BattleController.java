@@ -27,6 +27,6 @@ public class BattleController {
 
     @RequestMapping(value = { "/opponent", "/opponent/" }, method = { RequestMethod.POST, RequestMethod.OPTIONS })
     public @ResponseBody List<User> getOpponents(@RequestBody User user) {
-        return battleManager.getOpponents(user.getId());
+        return battleManager.getOpponents(user);
     }
 }

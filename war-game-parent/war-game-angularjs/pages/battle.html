@@ -1,8 +1,9 @@
-<div ng-controller="battleController">
+<div>
     <h3>Opponents</h3>
     <ul style="list-style-type:none">
-        <li ng-repeat="item in items">
-            {{ item.username }}
+        <li>Level&nbsp;&nbsp;&nbsp;Name</li>
+        <li ng-repeat="opponent in opponents">
+            {{ opponent.level }}&nbsp;&nbsp;&nbsp;{{ opponent.username }}
         </li>
     </ul>
 </div>

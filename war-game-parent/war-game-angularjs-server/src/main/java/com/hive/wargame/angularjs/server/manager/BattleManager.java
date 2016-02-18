@@ -20,27 +20,27 @@ public class BattleManager {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getOpponents(long id) {
-        LOGGER.trace("Returning opponents for {}", id);
+    public List<User> getOpponents(User user) {
+        LOGGER.trace("Returning opponents for {}", user.getId());
 
-        if (id == 0) {
+        if (user.getId() == 0) {
             return new ArrayList<User>();
         }
 
-        Iterable<User> users = userRepository.findAll();
+        Iterable<User> users = userRepository.findByLevel(user.getLevel());
 
         Iterator<User> userIt = users.iterator();
 
-        List<User> userList = new ArrayList<User>();
+        List<User> opponentList = new ArrayList<User>();
 
         while (userIt.hasNext()) {
-            User user = userIt.next();
+            User posUser = userIt.next();
 
-            if (id != user.getId()) {
-                userList.add(user);
+            if (user.getId() != posUser.getId()) {
+                opponentList.add(posUser);
             }
         }
 
-        return userList;
+        return opponentList;
     }
 }
