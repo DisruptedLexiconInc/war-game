@@ -14,6 +14,7 @@ public class Mission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "mision_id")
     private long id;
 
     @Column(nullable = false, unique = true)

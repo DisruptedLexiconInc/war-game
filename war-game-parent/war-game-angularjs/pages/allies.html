@@ -1,0 +1,9 @@
+<div>
+    <h3>Alliances</h3>
+    <ul style="list-style-type:none">
+        <li>Name&nbsp;&nbsp;&nbsp;Description</li>
+        <li ng-repeat="alliance in alliances">
+            {{ alliance.name }}&nbsp;&nbsp;&nbsp;{{ alliance.description }}&nbsp;&nbsp;&nbsp;{{ alliance.users.count() }}
+        </li>
+    </ul>
+</div>

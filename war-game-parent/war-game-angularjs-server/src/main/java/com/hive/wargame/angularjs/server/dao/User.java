@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private long id;
 
     @Column(nullable = false, unique = true)
@@ -42,6 +45,10 @@ public class User {
     @JsonProperty(required = false)
     private int energy;
 
+    @ManyToOne
+    @JoinColumn(name = "alliance_id")
+    private Alliance alliance;
+
     public User() {
 
     }
@@ -65,6 +72,16 @@ public class User {
         this.experience = experience;
         this.cash = cash;
         this.energy = energy;
+    }
+
+    public User(String username, String password, int level, int experience, int cash, int energy, Alliance alliance) {
+        this.username = username;
+        this.password = password;
+        this.level = level;
+        this.experience = experience;
+        this.cash = cash;
+        this.energy = energy;
+        this.alliance = alliance;
     }
 
     public long getId() {
@@ -121,6 +138,14 @@ public class User {
 
     public void setEnergy(int energy) {
         this.energy = energy;
+    }
+
+    public Alliance getAlliance() {
+        return alliance;
+    }
+
+    public void setAlliance(Alliance alliance) {
+        this.alliance = alliance;
     }
 
     @Override

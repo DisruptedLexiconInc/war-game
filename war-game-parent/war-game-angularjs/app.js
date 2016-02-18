@@ -182,13 +182,30 @@ myApp.controller('missionsController', ['$rootScope', '$log', '$routeParams', '$
     }
 }]);
 
-myApp.controller('alliesController', ['$rootScope', '$log', '$routeParams', '$location', function ($rootScope, $log, $routeParams, $location) {
+myApp.controller('alliesController', ['$rootScope', '$log', '$http', '$routeParams', '$location', function ($rootScope, $log, $http, $routeParams, $location) {
     $log.info('User loaded allies screen');
 
     if (typeof $rootScope.user === 'undefined' || $rootScope.user.id < 1) {
         $log.debug("user not logged in. redirecting to login page.");
 
         $location.url('/login');
+    } else {
+        $rootScope.alliances = [];
+        $rootScope.addAlliance = function (data) {
+            $rootScope.alliances.push(data);
+        };
+
+        $http.get('http://127.0.0.1:51849/alliances/').success(function (data, status) {
+            $log.debug('JSON alliances rsponse is' + JSON.stringify(data));
+
+            angular.forEach(data, function (singData, index) {
+                $log.debug(index + ' ' + singData);
+                $rootScope.addAlliance(singData);
+            });
+
+        }).error(function (status) {
+            $log.warn('error happened: ' + status);
+        });
     }
 }]);
 

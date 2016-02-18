@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hive.wargame.angularjs.server.dao.Alliance;
 import com.hive.wargame.angularjs.server.dao.Mission;
 import com.hive.wargame.angularjs.server.dao.User;
 import com.hive.wargame.angularjs.server.exception.LoginException;
+import com.hive.wargame.angularjs.server.service.AllianceService;
 import com.hive.wargame.angularjs.server.service.MissionService;
 import com.hive.wargame.angularjs.server.service.UserService;
 
@@ -25,6 +27,9 @@ public class InitializerService {
 
     @Autowired
     private MissionService missionService;
+
+    @Autowired
+    private AllianceService allianceService;
 
     @PostConstruct
     public void init() throws LoginException {
@@ -60,6 +65,17 @@ public class InitializerService {
             missionService.add(new Mission("Rob Bank", 200, 15, 400, 1));
         } else {
             LOGGER.trace("Database contains users. Will not add mock users.");
+        }
+
+        List<Alliance> alliances = allianceService.getAll();
+
+        if (alliances.isEmpty()) {
+            LOGGER.trace("There are no alliances in database. Adding mock alliances.");
+
+            allianceService.add(new Alliance("The Bears", "Interesting club for bears"));
+            allianceService.add(new Alliance("The Cats", "Interesting club for cats"));
+        } else {
+            LOGGER.trace("Database contains alliances. Will not add mock alliances.");
         }
     }
 }
