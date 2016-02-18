@@ -39,6 +39,7 @@ public class InitializerService {
             userService.add(new User("gsugambit", "gsugambit", 0, 0, 1000, 100));
             userService.add(new User("bludbaf", "bludbaf", 0, 0, 1000, 100));
             userService.add(new User("benlm", "benlm", 0, 0, 1000, 100));
+            userService.add(new User("alex", "alex", 0, 0, 1000, 100));
 
             String level = "level";
             String currUser;
